@@ -1,0 +1,36 @@
+body {
+    font-family: sans-serif;
+    direction: rtl;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: right;
+}
+
+input {
+    padding: 8px;
+    margin-left: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+#results, #all-articles {
+    margin-top: 20px;
+    text-align: right;
+}
+
+#all-articles .article {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+#all-articles h3 {
+    margin-top: 0;
+}
