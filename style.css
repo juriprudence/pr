@@ -1,22 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --background-color: #ecf0f1;
+    --surface-color: #ffffff;
+    --text-color: #34495e;
+    --border-color: #bdc3c7;
+}
+
 body {
-    font-family: sans-serif;
+    font-family: 'Cairo', sans-serif;
     direction: rtl;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
 }
 
 .container {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--surface-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: right;
 }
 
-input {
-    padding: 8px;
-    margin-left: 8px;
+h1, h2 {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 10px;
+    margin-bottom: 1.5rem;
+}
+
+input[type="text"] {
     width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
     box-sizing: border-box;
-    margin-bottom: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
 }
 
 #results, #all-articles {
@@ -24,13 +58,66 @@ input {
     text-align: right;
 }
 
-#all-articles .article {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+.article {
+    background-color: #fdfdfd;
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    transition: box-shadow 0.3s, transform 0.3s;
 }
 
-#all-articles h3 {
+.article:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.article h3 {
     margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+}
+
+.article p {
+    margin-bottom: 0;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 2rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 0;
+    }
+
+    .container {
+        margin: 0;
+        padding: 1rem;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    input[type="text"] {
+        font-size: 0.9rem;
+    }
 }

@@ -10,7 +10,242 @@ window.addEventListener('DOMContentLoaded', async () => {
     buildTfIdfIndex();
     displayAllArticles(allArticles);
 });
-
+class ArabicTokenizer {
+    constructor(options = {}) {
+        // Configuration options
+        this.removeStopWords = options.removeStopWords ?? true;
+        this.normalizeDiacritics = options.normalizeDiacritics ?? true;
+        this.normalizeAlef = options.normalizeAlef ?? true;
+        this.minTokenLength = options.minTokenLength ?? 2;
+        this.keepNumbers = options.keepNumbers ?? false;
+        this.keepEnglish = options.keepEnglish ?? false;
+        
+        // Arabic stop words (common words to filter out)
+        this.stopWords = new Set([
+            'في', 'من', 'إلى', 'على', 'عن', 'مع', 'هذا', 'هذه', 'ذلك', 'تلك',
+            'التي', 'الذي', 'اللتان', 'اللذان', 'اللتين', 'اللذين', 'اللاتي', 'اللواتي',
+            'ما', 'هو', 'هي', 'هم', 'هن', 'أن', 'إن', 'كان', 'كانت', 'يكون', 'تكون',
+            'قد', 'لقد', 'كل', 'بعض', 'عند', 'لدى', 'حتى', 'قبل', 'بعد', 'أمام', 'خلف',
+            'فوق', 'تحت', 'يمين', 'يسار', 'شمال', 'جنوب', 'شرق', 'غرب', 'أو', 'أم',
+            'لكن', 'لكن', 'إذا', 'إذ', 'منذ', 'حين', 'حيث', 'كيف', 'كم', 'متى', 'أين',
+            'لماذا', 'ماذا', 'من', 'أي', 'كذلك', 'أيضا', 'فقط', 'عندما', 'ثم', 'أما'
+        ]);
+        
+        // Common Arabic prefixes and suffixes
+        this.prefixes = ['ال', 'و', 'ف', 'ب', 'ك', 'ل', 'لل'];
+        this.suffixes = ['ها', 'ان', 'ين', 'ون', 'ات', 'ة', 'ه', 'ي', 'ك', 'ت', 'كم', 'كن', 'نا', 'ني', 'هم', 'هن', 'كما', 'هما'];
+    }
+    
+    // Normalize Arabic characters
+    normalizeArabic(text) {
+        if (this.normalizeAlef) {
+            // Normalize different forms of Alef
+            text = text.replace(/[آأإٱ]/g, 'ا');
+        }
+        
+        if (this.normalizeDiacritics) {
+            // Remove Arabic diacritics (tashkeel)
+            text = text.replace(/[\u064B-\u065F\u0670]/g, '');
+        }
+        
+        // Normalize Yaa and Alef Maqsura
+        text = text.replace(/ى/g, 'ي');
+        
+        // Normalize Taa Marbouta
+        text = text.replace(/ة/g, 'ه');
+        
+        // Remove Tatweel (character elongation)
+        text = text.replace(/ـ/g, '');
+        
+        return text;
+    }
+    
+    // Remove common prefixes
+    removePrefix(token) {
+        for (let prefix of this.prefixes) {
+            if (token.startsWith(prefix) && token.length > prefix.length + 1) {
+                return token.substring(prefix.length);
+            }
+        }
+        return token;
+    }
+    
+    // Remove common suffixes
+    removeSuffix(token) {
+        for (let suffix of this.suffixes) {
+            if (token.endsWith(suffix) && token.length > suffix.length + 1) {
+                return token.substring(0, token.length - suffix.length);
+            }
+        }
+        return token;
+    }
+    
+    // Light stemming for Arabic
+    lightStem(token) {
+        // Remove definite article 'ال' if at the beginning
+        if (token.startsWith('ال') && token.length > 2) {
+            token = token.substring(2);
+        }
+        
+        // Remove common conjunction prefixes
+        if (token.startsWith('و') && token.length > 1) {
+            token = token.substring(1);
+        }
+        
+        // Remove possessive pronouns at the end
+        const possessivePronouns = ['ني', 'نا', 'ها', 'هم', 'هن', 'كم', 'كن', 'ه', 'ك', 'ي'];
+        for (let pronoun of possessivePronouns) {
+            if (token.endsWith(pronoun) && token.length > pronoun.length + 1) {
+                token = token.substring(0, token.length - pronoun.length);
+                break;
+            }
+        }
+        
+        return token;
+    }
+    
+    // Check if token is valid Arabic word
+    isValidArabicToken(token) {
+        // Must contain at least one Arabic character
+        return /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/.test(token);
+    }
+    
+    // Main tokenization function
+    tokenize(text, options = {}) {
+        // Merge options with instance options
+        const opts = { ...this, ...options };
+        
+        // Normalize the text
+        let normalizedText = this.normalizeArabic(text);
+        
+        // Convert to lowercase (for any Latin characters)
+        normalizedText = normalizedText.toLowerCase();
+        
+        // Define what to keep based on options
+        let regex;
+        if (opts.keepNumbers && opts.keepEnglish) {
+            // Keep Arabic, English, and numbers
+            regex = /[^\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFFa-zA-Z0-9\s]/g;
+        } else if (opts.keepNumbers) {
+            // Keep Arabic and numbers only
+            regex = /[^\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF0-9\s]/g;
+        } else if (opts.keepEnglish) {
+            // Keep Arabic and English only
+            regex = /[^\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFFa-zA-Z\s]/g;
+        } else {
+            // Keep Arabic only
+            regex = /[^\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF\s]/g;
+        }
+        
+        // Remove unwanted characters
+        normalizedText = normalizedText.replace(regex, ' ');
+        
+        // Split into tokens
+        let tokens = normalizedText.split(/\s+/).filter(token => token.length > 0);
+        
+        // Process each token
+        tokens = tokens.map(token => {
+            // Light stemming
+            if (opts.lightStem) {
+                token = this.lightStem(token);
+            }
+            
+            // Remove prefixes and suffixes if requested
+            if (opts.removePrefixes) {
+                token = this.removePrefix(token);
+            }
+            if (opts.removeSuffixes) {
+                token = this.removeSuffix(token);
+            }
+            
+            return token;
+        });
+        
+        // Filter tokens
+        tokens = tokens.filter(token => {
+            // Check minimum length
+            if (token.length < opts.minTokenLength) {
+                return false;
+            }
+            
+            // Remove stop words if requested
+            if (opts.removeStopWords && this.stopWords.has(token)) {
+                return false;
+            }
+            
+            // Ensure it's a valid Arabic token (unless we're keeping English/numbers)
+            if (!opts.keepEnglish && !opts.keepNumbers) {
+                return this.isValidArabicToken(token);
+            }
+            
+            return true;
+        });
+        
+        return tokens;
+    }
+    
+    // Get token frequencies
+    getTokenFrequencies(text, options = {}) {
+        const tokens = this.tokenize(text, options);
+        const frequencies = {};
+        
+        for (let token of tokens) {
+            frequencies[token] = (frequencies[token] || 0) + 1;
+        }
+        
+        // Sort by frequency
+        return Object.entries(frequencies)
+            .sort((a, b) => b[1] - a[1])
+            .reduce((acc, [token, freq]) => {
+                acc[token] = freq;
+                return acc;
+            }, {});
+    }
+    
+    // N-gram generation
+    generateNgrams(text, n = 2, options = {}) {
+        const tokens = this.tokenize(text, options);
+        const ngrams = [];
+        
+        for (let i = 0; i <= tokens.length - n; i++) {
+            ngrams.push(tokens.slice(i, i + n).join(' '));
+        }
+        
+        return ngrams;
+    }
+    
+    // Extract root patterns (advanced stemming)
+    extractRootPattern(token) {
+        // This is a simplified version - real Arabic root extraction is complex
+        // Remove common affixes
+        let root = token;
+        
+        // Remove definite article
+        if (root.startsWith('ال')) {
+            root = root.substring(2);
+        }
+        
+        // Remove common prefixes
+        const prefixPatterns = ['مست', 'مت', 'م', 'ت', 'ي', 'ن', 'أ'];
+        for (let prefix of prefixPatterns) {
+            if (root.startsWith(prefix) && root.length > prefix.length + 2) {
+                root = root.substring(prefix.length);
+                break;
+            }
+        }
+        
+        // Remove common suffixes
+        const suffixPatterns = ['يون', 'ات', 'ان', 'ين', 'ون', 'ة', 'ه', 'ي'];
+        for (let suffix of suffixPatterns) {
+            if (root.endsWith(suffix) && root.length > suffix.length + 2) {
+                root = root.substring(0, root.length - suffix.length);
+                break;
+            }
+        }
+        
+        return root;
+    }
+}
 articleNumberInput.addEventListener('input', () => {
     const query = articleNumberInput.value.trim();
     if (query) {
@@ -233,12 +468,13 @@ class TfIdf {
     }
 
     tokenize(text) {
+        const tokenizer = new ArabicTokenizer({
+    removeStopWords: true,
+    minTokenLength: 2,
+    lightStem: true
+});
         // Enhanced tokenization for Arabic text
-        return text
-            .toLowerCase()
-            .replace(/[^\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFFa-zA-Z0-9\s]/g, ' ')
-            .split(/\s+/)
-            .filter(token => token.length > 1); // Filter out single character tokens
+        return tokenizer.tokenize(text) // Filter out single character tokens
     }
 
     // Method to get term statistics (useful for debugging)
