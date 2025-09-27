@@ -2852,4 +2852,159 @@
 <articlenum>890</articlenum><articlecontent>ينشر هذا القانون في الجريدة ال ّرسميّة للجمهوريّة الجزائريّة ال ّديمقراطيّة ال ّشعبيّة.
 ح ّرر بالجزائر في 9 صفر عام 1447 الموافق 3 غشت سنة .2025
 عبد المجيد تبون</articlecontent>
+<title>الكتاب الأول: أحكام عامة في الدعوى العمومية والدعوى المدنية</title> <beforarticle>1</beforarticle>
+<title>الكتاب الثاني: في مباشرة الدعوى العمومية وإجراء التحقيق</title> <beforarticle>19</beforarticle>
+<title>الباب الأول: في البحث والتحري عن الجرائم</title> <beforarticle>19</beforarticle>
+<title>الفصل الأول: في الضبط القضائي</title> <beforarticle>20</beforarticle>
+<title>القسم الأول: أحكام عامة</title> <beforarticle>20</beforarticle>
+<title>القسم الثاني: في ضباط الشرطة القضائية</title> <beforarticle>23</beforarticle>
+<title>القسم الثالث: في أعوان الضبط القضائي</title> <beforarticle>29</beforarticle>
+<title>القسم الرابع: في الموظفين والأعوان المكلفين ببعض مهام الضبط القضائي</title> <beforarticle>31</beforarticle>
+<title>القسم الخامس: في سلطات الولاة في مجال الضبط القضائي</title> <beforarticle>38</beforarticle>
+<title>الفصل الثاني: في النيابة العامة</title> <beforarticle>39</beforarticle>
+<title>القسم الأول: أحكام عامة</title> <beforarticle>39</beforarticle>
+<title>القسم الثاني: في اختصاصات ممثلي النيابة العامة</title> <beforarticle>43</beforarticle>
+<title>القسم الثالث: في الوساطة</title> <beforarticle>59</beforarticle>
+<title>الفصل الثالث: في قاضي التحقيق</title> <beforarticle>69</beforarticle>
+<title>الباب الثاني: في التحقيقات</title> <beforarticle>72</beforarticle>
+<title>الفصل الأول: في الجناية أو الجنحة المتلبس بها</title> <beforarticle>72</beforarticle>
+<title>الفصل الثاني: في التحقيق الابتدائي</title> <beforarticle>96</beforarticle>
+<title>الفصل الثالث: في المتابعة الجزائية للشخص المعنوي</title> <beforarticle>100</beforarticle>
+<title>القسم الأول: أحكام عامة</title> <beforarticle>100</beforarticle>
+<title>القسم الثاني: إرجاء المتابعة الجزائية</title> <beforarticle>105</beforarticle>
+<title>الفصل الرابع: في اعتراض المراسلات وتسجيل الأصوات والتقاط الصور</title> <beforarticle>114</beforarticle>
+<title>الفصل الخامس: في التسرب</title> <beforarticle>120</beforarticle>
+<title>الفصل السادس: في حماية الشهود والخبراء والمّدعين المدنيين والضحايا والأطراف المدنية والمبلّغين</title> <beforarticle>128</beforarticle>
+<title>الباب الثالث: في جهات التحقيق</title> <beforarticle>139</beforarticle>
+<title>الفصل الأول: في قاضي التحقيق</title> <beforarticle>139</beforarticle>
+<title>القسم الأول: أحكام عامة</title> <beforarticle>139</beforarticle>
+<title>القسم الثاني: في الادعاء المدني</title> <beforarticle>147</beforarticle>
+<title>القسم الثالث: في الانتقال والتفتيش والضبط</title> <beforarticle>155</beforarticle>
+<title>القسم الرابع: في سماع الشهود</title> <beforarticle>163</beforarticle>
+<title>القسم الخامس: في الاستجواب والمواجهة</title> <beforarticle>175</beforarticle>
+<title>القسم السادس: في أوامر القضاء وتنفيذها</title> <beforarticle>184</beforarticle>
+<title>القسم السابع: في الإفراج والرقابة القضائية والحبس المؤقت</title> <beforarticle>197</beforarticle>
+<title>القسم الثامن: في التعويض عن الحبس المؤقت</title> <beforarticle>219</beforarticle>
+<title>القسم التاسع: في الإنابة القضائية</title> <beforarticle>234</beforarticle>
+<title>القسم العاشر: في الخبرة</title> <beforarticle>239</beforarticle>
+<title>القسم الحادي عشر: في بطلان إجراءات التحقيق</title> <beforarticle>253</beforarticle>
+<title>القسم الثاني عشر: في أوامر التصرف بعد انتهاء التحقيق</title> <beforarticle>258</beforarticle>
+<title>القسم الثالث عشر: في استئناف أوامر قاضي التحقيق</title> <beforarticle>266</beforarticle>
+<title>القسم الرابع عشر: في إعادة التحقيق لظهور أدلة جديدة</title> <beforarticle>271</beforarticle>
+<title>الفصل الثاني: في غرفة الاتهام بالمجلس القضائي</title> <beforarticle>272</beforarticle>
+<title>القسم الأول: أحكام عامة</title> <beforarticle>272</beforarticle>
+<title>القسم الثاني: في السلطات الخاصة برئيس غرفة الاتهام</title> <beforarticle>299</beforarticle>
+<title>القسم الثالث: في مراقبة أعمال ضباط وأعوان الشرطة القضائية والموظفين والأعوان المنوطة بهم بعض مهام الضبط القضائي</title> <beforarticle>302</beforarticle>
+<title>الفصل الثالث: استعمال الوسائل الإلكترونية</title> <beforarticle>308</beforarticle>
+<title>الباب الرابع: الأقطاب القضائية الجزائية</title> <beforarticle>309</beforarticle>
+<title>الفصل الأول: الأقطاب القضائية المتخصصة</title> <beforarticle>310</beforarticle>
+<title>الفصل الثاني: القطب الجزائي الوطني الاقتصادي والمالي</title> <beforarticle>315</beforarticle>
+<title>الفصل الثالث: القطب الجزائي الوطني لمكافحة الجرائم المتصلة بتكنولوجيات الإعلام والاتصال</title> <beforarticle>335</beforarticle>
+<title>الفصل الرابع: القطب الجزائي الوطني لمكافحة الإرهاب والجريمة المنظمة عبر الوطنية</title> <beforarticle>343</beforarticle>
+<title>الكتاب الثالث: في جهات الحكم</title> <beforarticle>349</beforarticle>
+<title>الباب الأول: أحكام مشتركة</title> <beforarticle>349</beforarticle>
+<title>الفصل الأول: في طرق الإثبات</title> <beforarticle>349</beforarticle>
+<title>الفصل الثاني: في الادعاء المدني</title> <beforarticle>376</beforarticle>
+<title>الباب الثاني: في محكمة الجنايات</title> <beforarticle>385</beforarticle>
+<title>الفصل الأول: في الاختصاص</title> <beforarticle>386</beforarticle>
+<title>الفصل الثاني: في انعقاد دورات محكمة الجنايات</title> <beforarticle>390</beforarticle>
+<title>الفصل الثالث: في تشكيل محكمة الجنايات</title> <beforarticle>393</beforarticle>
+<title>القسم الأول: أحكام عامة</title> <beforarticle>393</beforarticle>
+<title>القسم الثاني: في وظيفة المحلفين</title> <beforarticle>398</beforarticle>
+<title>القسم الثالث: في إعداد قائمة المحلفين</title> <beforarticle>401</beforarticle>
+<title>الفصل الرابع: في الإجراءات التحضيرية لدورات محكمة الجنايات</title> <beforarticle>405</beforarticle>
+<title>الفصل الخامس: في افتتاح الدورة</title> <beforarticle>416</beforarticle>
+<title>القسم الأول: في مراجعة قائمة المحلفين</title> <beforarticle>416</beforarticle>
+<title>القسم الثاني: في تشكيل محلفي الحكم</title> <beforarticle>420</beforarticle>
+<title>الفصل السادس: في المرافعات</title> <beforarticle>421</beforarticle>
+<title>القسم الأول: أحكام عامة</title> <beforarticle>421</beforarticle>
+<title>القسم الثاني: في حضور المتهم</title> <beforarticle>428</beforarticle>
+<title>القسم الثالث: في إقامة الأدلة</title> <beforarticle>433</beforarticle>
+<title>القسم الرابع: في إقفال باب المناقشات</title> <beforarticle>440</beforarticle>
+<title>الفصل السابع: في الحكم</title> <beforarticle>444</beforarticle>
+<title>القسم الأول: في المداولة</title> <beforarticle>444</beforarticle>
+<title>القسم الثاني: في الحكم الذي يصدر في الدعوى العمومية</title> <beforarticle>448</beforarticle>
+<title>القسم الثالث: في الحكم الذي يصدر في الدعوى المدنية</title> <beforarticle>450</beforarticle>
+<title>الفصل الثامن: في الغياب أمام محكمة الجنايات</title> <beforarticle>451</beforarticle>
+<title>الفصل التاسع: استئناف الأحكام الصادرة عن محكمة الجنايات الابتدائية</title> <beforarticle>457</beforarticle>
+<title>الفصل العاشر: الإجراءات المتبعة أمام محكمة الجنايات الاستئنافية</title> <beforarticle>463</beforarticle>
+<title>الباب الثالث: في الحكم في الجنح والمخالفات</title> <beforarticle>467</beforarticle>
+<title>أحكام عامة</title> <beforarticle>467</beforarticle>
+<title>الفصل الأول: في الحكم في الجنح</title> <beforarticle>473</beforarticle>
+<title>القسم الأول: في رفع الدعوى إلى المحكمة</title> <beforarticle>473</beforarticle>
+<title>القسم الثاني: الإخطار الفوري أمام المحكمة</title> <beforarticle>477</beforarticle>
+<title>القسم الثالث: في تشكيلة المحكمة</title> <beforarticle>489</beforarticle>
+<title>القسم الرابع: في علانية وضبط الجلسة</title> <beforarticle>492</beforarticle>
+<title>القسم الخامس: في المرافعات وحضور المتهم</title> <beforarticle>493</beforarticle>
+<title>القسم السادس: في الحكم من حيث هو</title> <beforarticle>505</beforarticle>
+<title>القسم السابع: في إجراءات الأمر الجزائي</title> <beforarticle>531</beforarticle>
+<title>القسم الثامن: المثول بناء على الاعتراف المسبق بالذنب</title> <beforarticle>539</beforarticle>
+<title>الفصل الثاني: في الحكم في مواد المخالفات</title> <beforarticle>549</beforarticle>
+<title>القسم الأول: في غرامة الصلح</title> <beforarticle>550</beforarticle>
+<title>القسم الثاني: في رفع الدعوى أمام المحكمة</title> <beforarticle>564</beforarticle>
+<title>القسم الثالث: في التحقيق النهائي في مواد المخالفات</title> <beforarticle>567</beforarticle>
+<title>الفصل الثالث: في الحكم الغيابي والمعارضة</title> <beforarticle>577</beforarticle>
+<title>القسم الأول: في التخلف عن الحضور</title> <beforarticle>577</beforarticle>
+<title>القسم الثاني: في المعارضة</title> <beforarticle>579</beforarticle>
+<title>الفصل الرابع: في استئناف الأحكام في مواد الجنح والمخالفات</title> <beforarticle>586</beforarticle>
+<title>القسم الأول: في مباشرة حق الاستئناف</title> <beforarticle>586</beforarticle>
+<title>القسم الثاني: في تشكيل الجهة القضائية الاستئنافية في مواد الجنح والمخالفات</title> <beforarticle>599</beforarticle>
+<title>القسم الثالث: في إجراءات الاستئناف أمام المجلس القضائي</title> <beforarticle>600</beforarticle>
+<title>الباب الرابع: في التكليف بالحضور والتبليغات</title> <beforarticle>609</beforarticle>
+<title>الباب الخامس: تسيير الأملاك المجمدة و/أو المحجوزة و/أو المصادرة</title> <beforarticle>621</beforarticle>
+<title>الكتاب الرابع: الجهات القضائية المكلفة بتطبيق العقوبات والإجراءات المتبعة أمامها</title> <beforarticle>627</beforarticle>
+<title>الفصل الأول: الجهات القضائية المكلفة بتطبيق العقوبات</title> <beforarticle>627</beforarticle>
+<title>الفصل الثاني: في الإجراءات المتبعة أمام الجهات القضائية المكلفة بتطبيق العقوبات</title> <beforarticle>630</beforarticle>
+<title>الكتاب الخامس: استعمال وسائل الاتصال المسموعة والمرئية أثناء الإجراءات</title> <beforarticle>639</beforarticle>
+<title>الباب الأول: أحكام عامة</title> <beforarticle>639</beforarticle>
+<title>الباب الثاني: استعمال المحادثة المرئية عن بعد في مرحلة التحقيق القضائي</title> <beforarticle>641</beforarticle>
+<title>الباب الثالث: استعمال المحادثة المرئية عن بعد في مرحلة المحاكمة</title> <beforarticle>646</beforarticle>
+<title>الكتاب السادس: في طرق الطعن غير العادية</title> <beforarticle>651</beforarticle>
+<title>الباب الأول: في الطعن بالنقض</title> <beforarticle>651</beforarticle>
+<title>الفصل الأول: في القرارات الجائز فيها الطعن وأوضاع وآثار الطعن</title> <beforarticle>651</beforarticle>
+<title>الفصل الثاني: في أوجه طرق الطعن</title> <beforarticle>656</beforarticle>
+<title>الفصل الثالث: في شكل الطعن</title> <beforarticle>660</beforarticle>
+<title>الفصل الرابع: في تحقيق الطعون وفي الجلسات</title> <beforarticle>671</beforarticle>
+<title>الفصل الخامس: في قرارات المحكمة العليا</title> <beforarticle>679</beforarticle>
+<title>الفصل السادس: في التنازل عن الطعن بالنقض وإعادة السير في الدعوى</title> <beforarticle>687</beforarticle>
+<title>الفصل السابع: في استدراك القرار</title> <beforarticle>689</beforarticle>
+<title>الفصل الثامن: في الطعن لصالح القانون</title> <beforarticle>692</beforarticle>
+<title>الباب الثاني: في طلبات إعادة النظر والتعويض عن الخطأ القضائي</title> <beforarticle>693</beforarticle>
+<title>الفصل الأول: في طلبات إعادة النظر</title> <beforarticle>693</beforarticle>
+<title>الفصل الثاني: في التعويض عن الخطأ القضائي</title> <beforarticle>694</beforarticle>
+<title>الكتاب السابع: في بعض الإجراءات الخاصة</title> <beforarticle>696</beforarticle>
+<title>الباب الأول: في التزوير</title> <beforarticle>696</beforarticle>
+<title>الباب الثاني: في اختفاء بعض أوراق الإجراءات</title> <beforarticle>702</beforarticle>
+<title>الباب الثالث: شهادة أعضاء الحكومة والسفراء</title> <beforarticle>706</beforarticle>
+<title>الباب الرابع: في تنازع الاختصاص بين القضاة</title> <beforarticle>709</beforarticle>
+<title>الباب الخامس: في الإحالة من محكمة إلى أخرى</title> <beforarticle>712</beforarticle>
+<title>الباب السادس: في الرد</title> <beforarticle>718</beforarticle>
+<title>الباب السابع: في الحكم في الجرائم التي ترتكب في جلسات المجالس القضائية والمحاكم</title> <beforarticle>731</beforarticle>
+<title>الباب الثامن: الجنايات والجنح المرتكبة من طرف أعضاء الحكومة والقضاة وبعض الموظفين</title> <beforarticle>736</beforarticle>
+<title>الباب التاسع: في الجنايات والجنح التي ترتكب في الخارج</title> <beforarticle>744</beforarticle>
+<title>الباب العاشر: في الجنايات والجنح التي ترتكب على ظهر المراكب أو على متن الطائرات</title> <beforarticle>752</beforarticle>
+<title>الكتاب الثامن: في بعض إجراءات التنفيذ</title> <beforarticle>754</beforarticle>
+<title>الباب الأول: في إيقاف التنفيذ</title> <beforarticle>754</beforarticle>
+<title>الباب الثاني: في التحقق من هوية الأشخاص المحكوم عليهم</title> <beforarticle>758</beforarticle>
+<title>الباب الثالث: في الإكراه البدني</title> <beforarticle>759</beforarticle>
+<title>الباب الرابع: في تقادم العقوبة</title> <beforarticle>776</beforarticle>
+<title>الباب الخامس: صحيفة السوابق القضائية</title> <beforarticle>783</beforarticle>
+<title>الفصل الأول: صحيفة السوابق القضائية للشخص الطبيعي</title> <beforarticle>783</beforarticle>
+<title>الفصل الثاني: صحيفة السوابق القضائية للأشخاص المعنوية</title> <beforarticle>814</beforarticle>
+<title>الفصل الثالث: صحيفة مخالفات المرور</title> <beforarticle>822</beforarticle>
+<title>الفصل الرابع: صحيفة الإدمان على المواد الكحولية والمخدرات والمؤثرات العقلية</title> <beforarticle>828</beforarticle>
+<title>الفصل الخامس: في آثار صحيفة السوابق القضائية</title> <beforarticle>834</beforarticle>
+<title>الباب السادس: في رد اعتبار المحكوم عليهم</title> <beforarticle>835</beforarticle>
+<title>الفصل الأول: في رد الاعتبار بقوة القانون</title> <beforarticle>836</beforarticle>
+<title>الفصل الثاني: في رد الاعتبار القضائي</title> <beforarticle>839</beforarticle>
+<title>الكتاب التاسع: في العلاقات مع السلطات القضائية الأجنبية</title> <beforarticle>856</beforarticle>
+<title>الباب الأول: في تسليم المجرمين</title> <beforarticle>856</beforarticle>
+<title>الفصل الأول: في شروط تسليم المجرمين</title> <beforarticle>856</beforarticle>
+<title>الفصل الثاني: في إجراءات التسليم</title> <beforarticle>864</beforarticle>
+<title>الفصل الثالث: في آثار التسليم</title> <beforarticle>876</beforarticle>
+<title>الفصل الرابع: في العبور (الترانزيت)</title> <beforarticle>881</beforarticle>
+<title>الفصل الخامس: في الأشياء المحجوزة</title> <beforarticle>882</beforarticle>
+<title>الباب الثاني: في الإنابات القضائية وفي تبليغ الأوراق والأحكام</title> <beforarticle>883</beforarticle>
+<title>الباب الثالث: في إرسال الأوراق والمستندات</title> <beforarticle>885</beforarticle>
+<title>الكتاب العاشر: أحكام انتقالية وختامية</title> <beforarticle>888</beforarticle>
 

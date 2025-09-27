@@ -121,3 +121,20 @@ hr {
         font-size: 0.9rem;
     }
 }
+.article-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2c3e50;
+    background-color: #ecf0f1;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-right: 4px solid #3498db;
+}
+
+.article-title-small {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #34495e;
+    font-style: italic;
+    margin-bottom: 5px;
+}

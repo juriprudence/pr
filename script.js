@@ -2,14 +2,18 @@ const articleNumberInput = document.getElementById('articleNumber');
 const resultsDiv = document.getElementById('results');
 const allArticlesDiv = document.getElementById('all-articles');
 let allArticles = [];
+let titlesData = [];
 let tfidfIndex = null;
 
 window.addEventListener('DOMContentLoaded', async () => {
-    allArticles = await loadArticles();
+    const data = await loadArticlesAndTitles();
+    allArticles = data.articles;
+    titlesData = data.titles;
     // Pre-build TF-IDF index for better performance
     buildTfIdfIndex();
     displayAllArticles(allArticles);
 });
+
 class ArabicTokenizer {
     constructor(options = {}) {
         // Configuration options
@@ -246,6 +250,7 @@ class ArabicTokenizer {
         return root;
     }
 }
+
 articleNumberInput.addEventListener('input', () => {
     const query = articleNumberInput.value.trim();
     if (query) {
@@ -304,29 +309,47 @@ function performTfIdfSearch(query) {
     return searchResults.slice(0, 20).map(r => r.article);
 }
 
-async function loadArticles() {
+async function loadArticlesAndTitles() {
     try {
         const response = await fetch('code.txt');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const text = await response.text();
-        const articles = [];
-        const articleRegex = /<articlenum>(\d+)<\/articlenum><articlecontent>([\s\S]*?)<\/articlecontent>/g;
-        let match;
         
-        while ((match = articleRegex.exec(text)) !== null) {
-            articles.push({
-                number: match[1],
-                content: match[2].trim().replace(/\s+/g, ' ')
+        // Parse titles first
+        const titles = [];
+        const titleRegex = /<title>(.*?)<\/title>\s*<beforarticle>(\d+)<\/beforarticle>/g;
+        let titleMatch;
+        
+        while ((titleMatch = titleRegex.exec(text)) !== null) {
+            titles.push({
+                title: titleMatch[1].trim(),
+                beforeArticle: parseInt(titleMatch[2])
             });
         }
         
-        console.log(`Loaded ${articles.length} articles`);
-        return articles;
+        // Parse articles
+        const articles = [];
+        const articleRegex = /<articlenum>(\d+)<\/articlenum><articlecontent>([\s\S]*?)<\/articlecontent>/g;
+        let articleMatch;
+        
+        while ((articleMatch = articleRegex.exec(text)) !== null) {
+            const articleNum = parseInt(articleMatch[1]);
+            const content = articleMatch[2].trim().replace(/\s+/g, ' ');
+            
+            articles.push({
+                number: articleMatch[1],
+                content: content,
+                title: null // Initialize as null, will be set properly later
+            });
+        }
+        
+        console.log(`Loaded ${articles.length} articles and ${titles.length} titles`);
+        return { articles, titles };
     } catch (error) {
-        console.error('Error loading articles:', error);
-        return [];
+        console.error('Error loading articles and titles:', error);
+        return { articles: [], titles: [] };
     }
 }
 
@@ -350,8 +373,23 @@ function findSimilarArticles(targetArticle) {
     return similarities.slice(0, 5).map(s => s.article);
 }
 
+// Fixed function to get title only for the specific article it should appear before
+function getTitleForArticle(articleNumber) {
+    const numericArticleNumber = parseInt(articleNumber);
+    // Find title that should appear exactly before this article number
+    const exactTitle = titlesData.find(t => t.beforeArticle === numericArticleNumber);
+    return exactTitle ? exactTitle.title : null;
+}
+
 function displayResults(mainArticle, similarArticles) {
-    let html = `<h2>المادة ${mainArticle.number}</h2><div class="main-article"><p>${mainArticle.content}</p></div>`;
+    const title = getTitleForArticle(mainArticle.number);
+    let html = '';
+    
+    if (title) {
+        html += `<div class="article-title">${title}</div>`;
+    }
+    
+    html += `<h2>المادة ${mainArticle.number}</h2><div class="main-article"><p>${mainArticle.content}</p></div>`;
     
     if (similarArticles.length > 0) {
         html += '<h3>مواد مشابهة:</h3>';
@@ -360,9 +398,13 @@ function displayResults(mainArticle, similarArticles) {
             const preview = article.content.length > 100 
                 ? article.content.substring(0, 100) + '...' 
                 : article.content;
-            html += `<div class="similar-article">
-                <strong>المادة ${article.number}</strong>: ${preview}
-            </div>`;
+            const articleTitle = getTitleForArticle(article.number);
+            
+            html += `<div class="similar-article">`;
+            if (articleTitle) {
+                html += `<div class="article-title-small">${articleTitle}</div>`;
+            }
+            html += `<strong>المادة ${article.number}</strong>: ${preview}</div>`;
         });
         html += '</div>';
     }
@@ -376,8 +418,13 @@ function displaySearchResults(articles) {
     } else {
         html += `<p>تم العثور على ${articles.length} نتيجة:</p>`;
         articles.forEach((article, index) => {
-            html += `<div class="article search-result">
-                <h3>المادة ${article.number}</h3>
+            const title = getTitleForArticle(article.number);
+            
+            html += `<div class="article search-result">`;
+            if (title) {
+                html += `<div class="article-title">${title}</div>`;
+            }
+            html += `<h3>المادة ${article.number}</h3>
                 <p>${article.content}</p>
             </div>`;
         });
@@ -387,9 +434,18 @@ function displaySearchResults(articles) {
 
 function displayAllArticles(articles) {
     let html = '<h2>جميع المواد</h2>';
-    articles.forEach(article => {
-        html += `<div class="article">
-            <h3>المادة ${article.number}</h3>
+    
+    // Sort articles by number to ensure proper order
+    const sortedArticles = [...articles].sort((a, b) => parseInt(a.number) - parseInt(b.number));
+    
+    sortedArticles.forEach(article => {
+        const title = getTitleForArticle(article.number);
+        
+        html += `<div class="article">`;
+        if (title) {
+            html += `<div class="article-title">${title}</div>`;
+        }
+        html += `<h3>المادة ${article.number}</h3>
             <p>${article.content}</p>
         </div>`;
     });
@@ -469,10 +525,10 @@ class TfIdf {
 
     tokenize(text) {
         const tokenizer = new ArabicTokenizer({
-    removeStopWords: true,
-    minTokenLength: 2,
-    lightStem: true
-});
+            removeStopWords: true,
+            minTokenLength: 2,
+            lightStem: true
+        });
         // Enhanced tokenization for Arabic text
         return tokenizer.tokenize(text) // Filter out single character tokens
     }
