@@ -278,15 +278,142 @@ function performSearch(query) {
         return;
     }
 
-    // For text queries, use TF-IDF to find and rank all relevant articles.
-    const searchResults = performTfIdfSearch(query);
+    // Search in titles first
+    const titleSearchResults = searchInTitles(query);
     
-    if (searchResults.length > 0) {
-        displaySearchResults(searchResults);
+    // Search in article content using TF-IDF
+    const contentSearchResults = performTfIdfSearch(query);
+    
+    // Combine and deduplicate results, prioritizing title matches
+    const combinedResults = combineSearchResults(titleSearchResults, contentSearchResults);
+    
+    if (combinedResults.length > 0) {
+        displaySearchResults(combinedResults);
     } else {
         resultsDiv.innerHTML = '<h2>نتائج البحث</h2><p>لم يتم العثور على نتائج.</p>';
     }
     allArticlesDiv.style.display = 'none';
+}
+
+// New function to handle clicking on search results
+function navigateToArticle(articleNumber) {
+    // Clear search input
+    articleNumberInput.value = '';
+    
+    // Hide search results
+    resultsDiv.innerHTML = '';
+    
+    // Show all articles
+    allArticlesDiv.style.display = 'block';
+    
+    // Scroll to the specific article with smooth animation
+    setTimeout(() => {
+        const articleElement = document.getElementById(`article-${articleNumber}`);
+        if (articleElement) {
+            articleElement.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+            });
+            
+            // Add highlight effect
+            articleElement.classList.add('highlighted-article');
+            setTimeout(() => {
+                articleElement.classList.remove('highlighted-article');
+            }, 3000); // Remove highlight after 3 seconds
+        }
+    }, 100);
+}
+
+// New function to search in titles
+function searchInTitles(query) {
+    const tokenizer = new ArabicTokenizer({
+        removeStopWords: true,
+        minTokenLength: 2,
+        lightStem: true
+    });
+    
+    const queryTokens = tokenizer.tokenize(query.toLowerCase());
+    const titleResults = [];
+    
+    titlesData.forEach(titleData => {
+        const titleTokens = tokenizer.tokenize(titleData.title.toLowerCase());
+        
+        // Calculate similarity score between query and title
+        let matchScore = 0;
+        let totalQueryTokens = queryTokens.length;
+        
+        queryTokens.forEach(queryToken => {
+            // Check for exact matches
+            if (titleTokens.includes(queryToken)) {
+                matchScore += 1;
+            } else {
+                // Check for partial matches (substring matching)
+                titleTokens.forEach(titleToken => {
+                    if (titleToken.includes(queryToken) || queryToken.includes(titleToken)) {
+                        matchScore += 0.5; // Lower score for partial matches
+                    }
+                });
+            }
+        });
+        
+        // Calculate match percentage
+        const matchPercentage = totalQueryTokens > 0 ? matchScore / totalQueryTokens : 0;
+        
+        if (matchPercentage > 0.3) { // Minimum 30% match threshold
+            // Find the first article after this title
+            const articleAfterTitle = allArticles.find(article => 
+                parseInt(article.number) >= titleData.beforeArticle
+            );
+            
+            if (articleAfterTitle) {
+                titleResults.push({
+                    article: articleAfterTitle,
+                    matchScore: matchPercentage,
+                    matchedTitle: titleData.title,
+                    isFromTitle: true
+                });
+            }
+        }
+    });
+    
+    // Sort by match score (highest first)
+    return titleResults.sort((a, b) => b.matchScore - a.matchScore);
+}
+
+// Function to combine title search results with content search results
+function combineSearchResults(titleResults, contentResults) {
+    const combinedMap = new Map();
+    
+    // Add title results first (they get priority)
+    titleResults.forEach(result => {
+        combinedMap.set(result.article.number, {
+            ...result,
+            priority: 1 // Higher priority for title matches
+        });
+    });
+    
+    // Add content results, but don't override title matches
+    contentResults.forEach(article => {
+        if (!combinedMap.has(article.number)) {
+            combinedMap.set(article.number, {
+                article: article,
+                matchScore: 0.5, // Default score for content matches
+                isFromTitle: false,
+                priority: 2 // Lower priority for content matches
+            });
+        }
+    });
+    
+    // Convert to array and sort by priority, then by match score
+    return Array.from(combinedMap.values())
+        .sort((a, b) => {
+            if (a.priority !== b.priority) {
+                return a.priority - b.priority; // Lower number = higher priority
+            }
+            return b.matchScore - a.matchScore; // Higher score first
+        })
+        .map(result => result.article)
+        .slice(0, 20); // Limit to top 20 results
 }
 
 function performTfIdfSearch(query) {
@@ -400,7 +527,7 @@ function displayResults(mainArticle, similarArticles) {
                 : article.content;
             const articleTitle = getTitleForArticle(article.number);
             
-            html += `<div class="similar-article">`;
+            html += `<div class="similar-article clickable-result" onclick="navigateToArticle('${article.number}')">`;
             if (articleTitle) {
                 html += `<div class="article-title-small">${articleTitle}</div>`;
             }
@@ -417,15 +544,59 @@ function displaySearchResults(articles) {
         html += '<p>لم يتم العثور على نتائج.</p>';
     } else {
         html += `<p>تم العثور على ${articles.length} نتيجة:</p>`;
-        articles.forEach((article, index) => {
-            const title = getTitleForArticle(article.number);
+        
+        // Group results by their source (title vs content)
+        const titleMatches = [];
+        const contentMatches = [];
+        
+        articles.forEach(article => {
+            // Check if this article was found through title search
+            const titleMatch = titlesData.find(titleData => {
+                const articleAfterTitle = allArticles.find(a => 
+                    parseInt(a.number) >= titleData.beforeArticle
+                );
+                return articleAfterTitle && articleAfterTitle.number === article.number;
+            });
             
-            html += `<div class="article search-result">`;
+            if (titleMatch) {
+                titleMatches.push({article, matchedTitle: titleMatch.title});
+            } else {
+                contentMatches.push({article});
+            }
+        });
+        
+        // Display title matches first
+        if (titleMatches.length > 0) {
+            html += '<h3>نتائج من العناوين:</h3>';
+            titleMatches.forEach(match => {
+                const title = getTitleForArticle(match.article.number);
+                
+                html += `<div class="article search-result title-match clickable-result" onclick="navigateToArticle('${match.article.number}')">`;
+                if (title) {
+                    html += `<div class="article-title highlighted-title">${title}</div>`;
+                }
+                html += `<h3>المادة ${match.article.number}</h3>
+                    <p>${match.article.content}</p>
+                    <div class="search-source">🔍 تم العثور عليها من خلال العنوان</div>
+                </div>`;
+            });
+        }
+        
+        // Display content matches
+        if (contentMatches.length > 0 && titleMatches.length > 0) {
+            html += '<h3>نتائج من المحتوى:</h3>';
+        }
+        
+        contentMatches.forEach(match => {
+            const title = getTitleForArticle(match.article.number);
+            
+            html += `<div class="article search-result content-match clickable-result" onclick="navigateToArticle('${match.article.number}')">`;
             if (title) {
                 html += `<div class="article-title">${title}</div>`;
             }
-            html += `<h3>المادة ${article.number}</h3>
-                <p>${article.content}</p>
+            html += `<h3>المادة ${match.article.number}</h3>
+                <p>${match.article.content}</p>
+                <div class="search-source">🔍 تم العثور عليها من خلال المحتوى</div>
             </div>`;
         });
     }
@@ -441,7 +612,7 @@ function displayAllArticles(articles) {
     sortedArticles.forEach(article => {
         const title = getTitleForArticle(article.number);
         
-        html += `<div class="article">`;
+        html += `<div class="article" id="article-${article.number}">`;
         if (title) {
             html += `<div class="article-title">${title}</div>`;
         }

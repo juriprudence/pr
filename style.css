@@ -138,3 +138,45 @@ hr {
     font-style: italic;
     margin-bottom: 5px;
 }
+.clickable-result {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.clickable-result:hover {
+    background-color: #f0f8ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #007bff;
+}
+
+/* Highlighted article after navigation */
+.highlighted-article {
+    background-color: #fff9c4 !important;
+    border: 2px solid #ffc107;
+    border-radius: 8px;
+    transition: all 0.5s ease;
+    padding: 20px !important;
+    margin: 10px 0 !important;
+    box-shadow: 0 0 20px rgba(255, 193, 7, 0.3);
+}
+
+/* Enhanced search result styling */
+.search-result {
+    border: 1px solid #e0e0e0;
+    margin-bottom: 15px;
+    background-color: #fafafa;
+}
+
+.title-match {
+    border-left: 4px solid #28a745;
+    background-color: #f8fff9;
+}
+
+.content-match {
+    border-left: 4px solid #17a2b8;
+    background-color: #f8fffe;
+}
